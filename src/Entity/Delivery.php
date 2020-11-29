@@ -48,6 +48,12 @@ class Delivery
      */
     private $User;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=DeliveryGuy::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $DeliveryGuy;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -121,6 +127,18 @@ class Delivery
     public function setUser(?User $User): self
     {
         $this->User = $User;
+
+        return $this;
+    }
+
+    public function getDeliveryGuy(): ?DeliveryGuy
+    {
+        return $this->DeliveryGuy;
+    }
+
+    public function setDeliveryGuy(?DeliveryGuy $DeliveryGuy): self
+    {
+        $this->DeliveryGuy = $DeliveryGuy;
 
         return $this;
     }
