@@ -19,8 +19,8 @@ class DeliveryGuyController extends AbstractController
         $deliveryguy=new DeliveryGuy();
         $form=$this->createForm(DeliveryGuyRegistryType::class,$deliveryguy);
         $form->handleRequest($request);
-        return $this->render('DeliveryGuy/DeliveryGuyRegistry.html.twig',['form'=>$form->createView(),
-        ]
-        );
+        return $this->render('DeliveryGuy/DeliveryGuyRegistry.html.twig',[
+            'form'=>$form->createView(),
+        ]);
     }
 }
