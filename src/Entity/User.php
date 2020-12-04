@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use PhpParser\Node\Scalar\String_;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -38,9 +39,9 @@ class User
     private $Password;
 
     /**
-     * @ORM\Column(type="array", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
-    private $Location = [];
+    private $Location;
 
     public function getId(): ?int
     {
@@ -95,12 +96,12 @@ class User
         return $this;
     }
 
-    public function getLocation(): ?array
+    public function getLocation(): ?String
     {
         return $this->Location;
     }
 
-    public function setLocation(?array $Location): self
+    public function setLocation(?String $Location): self
     {
         $this->Location = $Location;
 

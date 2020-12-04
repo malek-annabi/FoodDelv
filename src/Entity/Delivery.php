@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\DeliveryRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -16,11 +18,6 @@ class Delivery
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @ORM\Column(type="array")
-     */
-    private $Wallet = [];
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -54,21 +51,19 @@ class Delivery
      */
     private $DeliveryGuy;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Food::class)
+     */
+    private $Food;
+
+    public function __construct()
+    {
+        $this->Food = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getWallet(): ?array
-    {
-        return $this->Wallet;
-    }
-
-    public function setWallet(array $Wallet): self
-    {
-        $this->Wallet = $Wallet;
-
-        return $this;
     }
 
     public function getLocation(): ?string
@@ -139,6 +134,30 @@ class Delivery
     public function setDeliveryGuy(?DeliveryGuy $DeliveryGuy): self
     {
         $this->DeliveryGuy = $DeliveryGuy;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Food[]
+     */
+    public function getFood(): Collection
+    {
+        return $this->Food;
+    }
+
+    public function addFood(Food $food): self
+    {
+        if (!$this->Food->contains($food)) {
+            $this->Food[] = $food;
+        }
+
+        return $this;
+    }
+
+    public function removeFood(Food $food): self
+    {
+        $this->Food->removeElement($food);
 
         return $this;
     }
