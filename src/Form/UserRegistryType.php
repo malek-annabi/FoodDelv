@@ -21,8 +21,7 @@ class UserRegistryType extends AbstractType
             ->add('Email',TextType::class)
             ->add('Password',TextType::class)
             ->add('Location',TextType::class)
-            ->add("submit",SubmitType::class)
-            ->getForm();
+            ->add("submit",SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

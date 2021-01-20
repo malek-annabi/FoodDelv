@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\FoodRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,14 +25,19 @@ class Food
     private $Name;
 
     /**
-     * @ORM\Column(type="array")
-     */
-    private $ingredients = [];
-
-    /**
      * @ORM\Column(type="float")
      */
     private $Price;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $ingedients;
 
     public function getId(): ?int
     {
@@ -49,18 +56,6 @@ class Food
         return $this;
     }
 
-    public function getIngredients(): ?array
-    {
-        return $this->ingredients;
-    }
-
-    public function setIngredients(array $ingredients): self
-    {
-        $this->ingredients = $ingredients;
-
-        return $this;
-    }
-
     public function getPrice(): ?float
     {
         return $this->Price;
@@ -69,6 +64,30 @@ class Food
     public function setPrice(float $Price): self
     {
         $this->Price = $Price;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getIngedients(): ?string
+    {
+        return $this->ingedients;
+    }
+
+    public function setIngedients(?string $ingedients): self
+    {
+        $this->ingedients = $ingedients;
 
         return $this;
     }
