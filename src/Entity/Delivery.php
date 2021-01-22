@@ -39,27 +39,7 @@ class Delivery
      */
     private $Status;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $User;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=DeliveryGuy::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $DeliveryGuy;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Food::class)
-     */
-    private $Food;
-
-    public function __construct()
-    {
-        $this->Food = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -114,51 +94,4 @@ class Delivery
         return $this;
     }
 
-    public function getUser(): ?User
-    {
-        return $this->User;
-    }
-
-    public function setUser(?User $User): self
-    {
-        $this->User = $User;
-
-        return $this;
-    }
-
-    public function getDeliveryGuy(): ?DeliveryGuy
-    {
-        return $this->DeliveryGuy;
-    }
-
-    public function setDeliveryGuy(?DeliveryGuy $DeliveryGuy): self
-    {
-        $this->DeliveryGuy = $DeliveryGuy;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Food[]
-     */
-    public function getFood(): Collection
-    {
-        return $this->Food;
-    }
-
-    public function addFood(Food $food): self
-    {
-        if (!$this->Food->contains($food)) {
-            $this->Food[] = $food;
-        }
-
-        return $this;
-    }
-
-    public function removeFood(Food $food): self
-    {
-        $this->Food->removeElement($food);
-
-        return $this;
-    }
 }
