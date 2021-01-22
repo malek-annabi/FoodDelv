@@ -6,6 +6,7 @@ use App\Repository\DeliveryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Integer;
 
 /**
  * @ORM\Entity(repositoryClass=DeliveryRepository::class)
@@ -38,6 +39,17 @@ class Delivery
      * @ORM\Column(type="string", length=10)
      */
     private $Status;
+
+    /**
+     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+    /**
+     * @ORM\OneToOne(targetEntity=DeliveryGuy::class, cascade={"persist", "remove"})
+     */
+    private $deliveryguy;
 
 
 
@@ -90,6 +102,30 @@ class Delivery
     public function setStatus(string $Status): self
     {
         $this->Status = $Status;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getDeliveryguy(): ?DeliveryGuy
+    {
+        return $this->deliveryguy;
+    }
+
+    public function setDeliveryguy(?DeliveryGuy $deliveryguy): self
+    {
+        $this->deliveryguy = $deliveryguy;
 
         return $this;
     }
