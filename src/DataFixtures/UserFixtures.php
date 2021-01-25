@@ -24,10 +24,7 @@ class UserFixtures extends Fixture
             $user = new User();
             $user->setEmail($faker->email);
             $user->setPassword($this->encoder->encodePassword($user,'password'));
-            $user->setName($faker->lastName);
-            $user->setFirstname($faker->firstName);
             $user->setRoles([]);
-            $user->setLocation($faker->address);
             $manager->persist($user);
 
         }
