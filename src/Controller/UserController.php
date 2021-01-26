@@ -8,7 +8,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
  * Class UserController
@@ -22,6 +21,11 @@ class UserController extends AbstractController
      */
     public function UserRegistry(Request $request): Response
     {
+        $session = $request->getSession();
+        if ($session->has('_security.last_username')) {
+            $this->addFlash('notice','you are already logged in');
+            return $this->redirectToRoute('userprofile');
+        }
         $user = new User();
         $form = $this->createForm(UserRegistryType::class, $user);
         $form->handleRequest($request);
@@ -40,7 +44,12 @@ class UserController extends AbstractController
     /**
      * @Route ("/profile",name="profile")
      */
-    public function showProfile(){
+    public function showProfile(Request $request){
+        $session = $request->getSession();
+        if (!$session->has('_security.last_username')) {
+            $this->addFlash('notice','you have to login first');
+            return $this->redirectToRoute('app_login');
+        }
         return $this->render('user/UserProfile.html.twig');
     }
 }

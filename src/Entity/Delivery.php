@@ -3,10 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\DeliveryRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use phpDocumentor\Reflection\Types\Integer;
 
 /**
  * @ORM\Entity(repositoryClass=DeliveryRepository::class)
@@ -26,7 +23,7 @@ class Delivery
     private $Location;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(type="time", nullable=true)
      */
     private $Time;
 
@@ -70,12 +67,12 @@ class Delivery
         return $this;
     }
 
-    public function getTime(): ?\DateTimeInterface
+    public function getTime(): ?\DateTimeImmutable
     {
         return $this->Time;
     }
 
-    public function setTime(?\DateTimeInterface $Time): self
+    public function setTime(?\DateTimeImmutable $Time): self
     {
         $this->Time = $Time;
 

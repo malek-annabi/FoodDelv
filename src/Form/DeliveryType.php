@@ -15,7 +15,6 @@ class DeliveryType extends AbstractType
         $builder
             ->add('Location')
             ->add('Time')
-            ->add('Status')
             ->add('Submit',SubmitType::class)
         ;
     }
