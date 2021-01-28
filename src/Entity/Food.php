@@ -39,6 +39,16 @@ class Food
      */
     private $ingedients;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Delivery::class, mappedBy="Food")
+     */
+    private $deliveries;
+
+    public function __construct()
+    {
+        $this->deliveries = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -88,6 +98,33 @@ class Food
     public function setIngedients(?string $ingedients): self
     {
         $this->ingedients = $ingedients;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Delivery[]
+     */
+    public function getDeliveries(): Collection
+    {
+        return $this->deliveries;
+    }
+
+    public function addDelivery(Delivery $delivery): self
+    {
+        if (!$this->deliveries->contains($delivery)) {
+            $this->deliveries[] = $delivery;
+            $delivery->addFood($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDelivery(Delivery $delivery): self
+    {
+        if ($this->deliveries->removeElement($delivery)) {
+            $delivery->removeFood($this);
+        }
 
         return $this;
     }

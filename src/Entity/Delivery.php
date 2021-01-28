@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\DeliveryRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -47,6 +49,16 @@ class Delivery
      * @ORM\OneToOne(targetEntity=DeliveryGuy::class, cascade={"persist", "remove"})
      */
     private $deliveryguy;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Food::class, inversedBy="deliveries")
+     */
+    private $Food;
+
+    public function __construct()
+    {
+        $this->Food = new ArrayCollection();
+    }
 
 
 
@@ -123,6 +135,30 @@ class Delivery
     public function setDeliveryguy(?DeliveryGuy $deliveryguy): self
     {
         $this->deliveryguy = $deliveryguy;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Food[]
+     */
+    public function getFood(): Collection
+    {
+        return $this->Food;
+    }
+
+    public function addFood(Food $food): self
+    {
+        if (!$this->Food->contains($food)) {
+            $this->Food[] = $food;
+        }
+
+        return $this;
+    }
+
+    public function removeFood(Food $food): self
+    {
+        $this->Food->removeElement($food);
 
         return $this;
     }

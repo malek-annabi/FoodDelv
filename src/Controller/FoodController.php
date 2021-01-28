@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Food;
+use App\Entity\User;
 use App\Form\FoodRegistryType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,6 +22,17 @@ class FoodController extends AbstractController
      */
     public function UserRegistry(Request $request): Response
     {
+        $session = $request->getSession();
+        if (!$session->has('_security.last_username')) {
+            $this->addFlash('notice',"you need to login as an admin first to have access to this route");
+            return $this->redirectToRoute('app_login');
+        }
+        $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email'=>$session->get('_security.last_username')]);
+        $role=$user->getRoles();
+        if(!$role[0]=='admin'){
+            $this->addFlash('notice',"you need to be an administrator in order to have access to this content");
+            return $this->redirectToRoute("userprofile",['user'=>$user]);
+        }
         $food = new Food();
         $form = $this->createForm(FoodRegistryType::class, $food);
         $form->handleRequest($request);
@@ -39,7 +51,19 @@ class FoodController extends AbstractController
     /**
      * @Route ("/view",name="view")
      */
-    public function showView(){
-        return $this->render('food/FoodView.html.twig');
+    public function showView(Request $request){
+        $session = $request->getSession();
+        if (!$session->has('_security.last_username')) {
+            $this->addFlash('notice',"you need to login as an admin first to have access to this route");
+            return $this->redirectToRoute('app_login');
+        }
+        $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email'=>$session->get('_security.last_username')]);
+        $role=$user->getRoles();
+        if(!$role[0]=='admin'){
+            $this->addFlash('notice',"you need to be an administrator in order to have access to this content");
+            return $this->redirectToRoute("userprofile",['user'=>$user]);
+        }
+        $food = $this->getDoctrine()->getRepository(Food::class)->findAll();
+        return $this->render('food/FoodView.html.twig',['food'=>$food]);
     }
 }

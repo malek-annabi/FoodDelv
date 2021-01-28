@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Delivery;
+use Doctrine\DBAL\Types\TimeType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,7 +15,7 @@ class DeliveryType extends AbstractType
     {
         $builder
             ->add('Location')
-            ->add('Time')
+            ->add('Time',\Symfony\Component\Form\Extension\Core\Type\TimeType::class)
             ->add('Submit',SubmitType::class)
         ;
     }

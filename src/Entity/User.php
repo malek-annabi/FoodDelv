@@ -34,6 +34,21 @@ class User implements UserInterface
      */
     private $password;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $Location;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $Nmae;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $FirstName;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -110,5 +125,41 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getLocation(): ?string
+    {
+        return $this->Location;
+    }
+
+    public function setLocation(?string $Location): self
+    {
+        $this->Location = $Location;
+
+        return $this;
+    }
+
+    public function getNmae(): ?string
+    {
+        return $this->Nmae;
+    }
+
+    public function setNmae(?string $Nmae): self
+    {
+        $this->Nmae = $Nmae;
+
+        return $this;
+    }
+
+    public function getFirstName(): ?string
+    {
+        return $this->FirstName;
+    }
+
+    public function setFirstName(string $FirstName): self
+    {
+        $this->FirstName = $FirstName;
+
+        return $this;
     }
 }

@@ -16,12 +16,12 @@ class UserRegistryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('Name',TextType::class)
-            ->add('Firstname',TextType::class)
             ->add('Email',TextType::class)
             ->add('Password',TextType::class)
             ->add('Location',TextType::class)
-            ->add("submit",SubmitType::class);
+            ->add("submit",SubmitType::class)
+            ->add('Name',TextType::class)
+            ->add('Firstname',TextType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Admin;
 use App\Entity\Delivery;
 use App\Entity\User;
 use App\Form\DeliveryType;
