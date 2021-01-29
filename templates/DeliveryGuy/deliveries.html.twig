@@ -1,7 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
+    {% for delivery in deliveries %}
+        <tr>
+            <td>
+                 {{ delivery.Location }}
+            </td>
+        </tr>
+    {% endfor  %}
 {% endblock %}
 
 {% block title %}

@@ -33,6 +33,11 @@ class DeliveryController extends AbstractController
                 $entityManager = $this->getDoctrine()->getManager();
                 $del->setUser($user);
                 $del->setStatus('not examined');
+                $price=0;
+                foreach ($del->getFood() as $fo){
+                    $price+=$fo->getPrice();
+                }
+                $del->setPrice($price);
                 $entityManager->persist($del);
                 $entityManager->flush();
                 return $this->redirectToRoute('foodview');

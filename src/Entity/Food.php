@@ -20,11 +20,6 @@ class Food
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $Name;
-
-    /**
      * @ORM\Column(type="float")
      */
     private $Price;
@@ -44,6 +39,11 @@ class Food
      */
     private $deliveries;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $name;
+
     public function __construct()
     {
         $this->deliveries = new ArrayCollection();
@@ -52,18 +52,6 @@ class Food
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->Name;
-    }
-
-    public function setName(string $Name): self
-    {
-        $this->Name = $Name;
-
-        return $this;
     }
 
     public function getPrice(): ?float
@@ -125,6 +113,18 @@ class Food
         if ($this->deliveries->removeElement($delivery)) {
             $delivery->removeFood($this);
         }
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }

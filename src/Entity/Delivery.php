@@ -25,7 +25,7 @@ class Delivery
     private $Location;
 
     /**
-     * @ORM\Column(type="time", nullable=true)
+     * @ORM\Column(type="datetime_immutable", nullable=true)
      */
     private $Time;
 

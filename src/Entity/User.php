@@ -40,14 +40,14 @@ class User implements UserInterface
     private $Location;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
-    private $Nmae;
+    private $FirstName;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $FirstName;
+    private $name;
 
     public function getId(): ?int
     {
@@ -139,18 +139,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getNmae(): ?string
-    {
-        return $this->Nmae;
-    }
-
-    public function setNmae(?string $Nmae): self
-    {
-        $this->Nmae = $Nmae;
-
-        return $this;
-    }
-
     public function getFirstName(): ?string
     {
         return $this->FirstName;
@@ -159,6 +147,18 @@ class User implements UserInterface
     public function setFirstName(string $FirstName): self
     {
         $this->FirstName = $FirstName;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }

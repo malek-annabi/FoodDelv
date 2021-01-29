@@ -3,7 +3,11 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Delivery;
+use Doctrine\ORM\EntityRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TimeField;
 
 class DeliveryCrudController extends AbstractCrudController
 {
@@ -11,15 +15,15 @@ class DeliveryCrudController extends AbstractCrudController
     {
         return Delivery::class;
     }
-
-    /*
+/*
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
+            TextField::new('Location'),
+            TimeField::new('Time'),
+            ArrayField::new('user',[])
+
         ];
     }
-    */
+*/
 }
