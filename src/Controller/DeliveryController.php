@@ -22,10 +22,10 @@ class DeliveryController extends AbstractController
      */
     public function index(Request $request): Response
     {
+        $del=new Delivery();
+        $form = $this->createForm(DeliveryType::class, $del);
         $session = $request->getSession();
         if ($session->has('_security.last_username')) {
-            $del=new Delivery();
-            $form = $this->createForm(DeliveryType::class, $del);
             $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email'=>$session->get('_security.last_username')]);
             $form->handleRequest($request);
             if ($form->isSubmitted()) {

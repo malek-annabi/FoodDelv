@@ -39,21 +39,17 @@ class Delivery
      */
     private $Status;
 
-    /**
-     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $user;
-
-    /**
-     * @ORM\OneToOne(targetEntity=DeliveryGuy::class, cascade={"persist", "remove"})
-     */
-    private $deliveryguy;
 
     /**
      * @ORM\ManyToMany(targetEntity=Food::class, inversedBy="deliveries")
      */
     private $Food;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
 
     public function __construct()
     {
@@ -115,29 +111,6 @@ class Delivery
         return $this;
     }
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    public function getDeliveryguy(): ?DeliveryGuy
-    {
-        return $this->deliveryguy;
-    }
-
-    public function setDeliveryguy(?DeliveryGuy $deliveryguy): self
-    {
-        $this->deliveryguy = $deliveryguy;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Food[]
@@ -159,6 +132,18 @@ class Delivery
     public function removeFood(Food $food): self
     {
         $this->Food->removeElement($food);
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

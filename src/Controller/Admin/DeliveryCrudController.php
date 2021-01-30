@@ -3,9 +3,14 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Delivery;
+use App\Entity\User;
+use App\Form\UserRegistryType;
+use Cassandra\Type\UserType;
 use Doctrine\ORM\EntityRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
+
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TimeField;
 
@@ -15,15 +20,16 @@ class DeliveryCrudController extends AbstractCrudController
     {
         return Delivery::class;
     }
-/*
+
     public function configureFields(string $pageName): iterable
     {
+        $delg=$this->getDoctrine()->getRepository(User::class)->findBy(['roles'=>'delg']);
         return [
             TextField::new('Location'),
             TimeField::new('Time'),
-            ArrayField::new('user',[])
+            ChoiceField::new('User')->setChoices($delg)
 
         ];
     }
-*/
+
 }
