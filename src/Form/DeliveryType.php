@@ -3,7 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Delivery;
+use App\Entity\DeliveryGuy;
 use App\Entity\Food;
+use App\Entity\User;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -28,6 +30,13 @@ class DeliveryType extends AbstractType
                 },
             'choice_label' => 'name',
                 'multiple'=>true])
+            ->add('DeliveryGuy',EntityType::class, [
+                'class' => DeliveryGuy::class,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('d')->orderBy('d.name','DESC');
+                },
+                'choice_label' => 'email',
+                'multiple'=>false])
             ->add('Submit',SubmitType::class);
     }
 

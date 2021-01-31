@@ -24,6 +24,7 @@ class DeliveryController extends AbstractController
     {
         $del=new Delivery();
         $form = $this->createForm(DeliveryType::class, $del);
+        $form->remove('DeliveryGuy');
         $session = $request->getSession();
         if ($session->has('_security.last_username')) {
             $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['email'=>$session->get('_security.last_username')]);

@@ -37,5 +37,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Deliveries',null,Delivery::class);
         yield MenuItem::linkToCrud('Food',null,Food::class);
         yield MenuItem::linkToCrud('Users',null,User::class);
+        yield MenuItem::linkToCrud('Delivery Guys',null,DeliveryGuy::class);
     }
 }

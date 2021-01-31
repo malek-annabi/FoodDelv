@@ -51,6 +51,11 @@ class Delivery
      */
     private $user;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=DeliveryGuy::class, inversedBy="deliveries")
+     */
+    private $deliveryguy;
+
     public function __construct()
     {
         $this->Food = new ArrayCollection();
@@ -144,6 +149,18 @@ class Delivery
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getDeliveryguy(): ?DeliveryGuy
+    {
+        return $this->deliveryguy;
+    }
+
+    public function setDeliveryguy(?DeliveryGuy $deliveryguy): self
+    {
+        $this->deliveryguy = $deliveryguy;
 
         return $this;
     }
