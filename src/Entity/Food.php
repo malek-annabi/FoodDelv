@@ -90,6 +90,7 @@ class Food
         return $this;
     }
 
+
     /**
      * @return Collection|Delivery[]
      */
@@ -128,4 +129,9 @@ class Food
 
         return $this;
     }
+
+    public function __toString() {
+        return $this->name;
+    }
+
 }

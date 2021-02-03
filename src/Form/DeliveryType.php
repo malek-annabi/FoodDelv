@@ -29,14 +29,9 @@ class DeliveryType extends AbstractType
                 return $er->createQueryBuilder('f')->orderBy('f.name','DESC');
                 },
             'choice_label' => 'name',
-                'multiple'=>true])
-            ->add('DeliveryGuy',EntityType::class, [
-                'class' => DeliveryGuy::class,
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('d')->orderBy('d.name','DESC');
-                },
-                'choice_label' => 'email',
-                'multiple'=>false])
+                'multiple'=>true,
+                'expanded'=>false
+                ])
             ->add('Submit',SubmitType::class);
     }
 
